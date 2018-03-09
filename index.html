@@ -5,35 +5,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/filmek-style.css">
     <title> Cím </title>
 </head>
 
 <body>
-    <div class="container">
-        <div id="ideberak">
-            <img src="/img/covers/amadeus.jpg" alt="">
-            <div class="movie">
-                <p class="title-para">
-                    Cím: title-text
-                </p>
-                <p class="duration-para">
-                    Hossz: duration perc
-                </p>
-                <p class="premier-para">
-                    Premier:
-                </p>
-                <p class="categories-para">
-                    Kategória:
-                </p>
-                <p class="director-para">
-                    Rendező:
-                </p>
-                <div class="cast-div">
-                    <img src="/img/actors/edward-norton.jpg" alt="">
-                    <p>Edward Norton(Tyler Durden)</p>
-                    <p>1969, USA Massachucsetts</p>
+    <div class="cont">
+        <div id="upper-div">
+            <div class="col-xs-8 col-xs-offset-2 center">
+
+
+                <form>
+                    <label>Mi alapján szeretnél keresni?</label>
+                    <div class="form-group">
+
+                        <select class="form-control" id="select-opt">
+                            <option value="title">Film cím</option>
+                            <option value="director">Rendező</option>
+                            <option value="character">Főszereplő</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+
+                        <label for="search-input">Mit szeretnél keresni?</label>
+                        <input name="search-input" id="search-text-input" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+
+                        <input type="button" class="button" value="Gomb">
+                </form>
+
                 </div>
+
+
+            </div>
+        </div>
+        <div class="container">
+
+
+
+            <div id="ideberak">
+                <img src="/img/covers/amadeus.jpg" alt="">
+                <div class="movie">
+                    <p class="title-para">
+                        Cím: title-text
+                    </p>
+                    <p class="duration-para">
+                        Hossz: duration perc
+                    </p>
+                    <p class="premier-para">
+                        Premier:
+                    </p>
+                    <p class="categories-para">
+                        Kategória:
+                    </p>
+                    <p class="director-para">
+                        Rendező:
+                    </p>
+                    <div class="cast-div">
+                        <img src="/img/actors/edward-norton.jpg" alt="">
+                        <p>Edward Norton(Tyler Durden)</p>
+                        <p>1969, USA Massachucsetts</p>
+                    </div>
+
+                </div>
+
+
 
             </div>
 
@@ -43,12 +81,8 @@
 
 
 
-    </div>
 
-
-
-
-    <script src="/js/filmek.js"></script>
+        <script src="/js/filmek.js"></script>
 </body>
 
 </html>

@@ -2,10 +2,26 @@ function callback(data) {
 
     let JSONmovies = JSON.parse(data.responseText).movies;
     console.log(JSONmovies);
-    ObjectMovie.rendez(JSONmovies)
-    ObjectMovie.kategoria(JSONmovies)
-    ObjectMovie.megjelenit(JSONmovies)
+    ObjectMovie.rendez(JSONmovies);
+    ObjectMovie.kategoria(JSONmovies);
+    //   ObjectMovie.szuro(JSONmovies, "director", "Fábri");
+    ObjectMovie.megjelenit(JSONmovies);
 
+    document.querySelector("form .button").addEventListener("click", searchFun)
+
+
+
+    function searchFun() {
+        let optVal = document.querySelector("#select-opt").value;
+        let searchInputVal = document.querySelector("#search-text-input").value
+        console.log("searchpar", searchInputVal);
+        console.log("optval", optVal);
+        ObjectMovie.megjelenit(ObjectMovie.szuro(JSONmovies, optVal, searchInputVal))
+    }
+
+
+
+    // ObjectMovie.megjelenit(ObjectMovie.szuro(JSONmovies, "title", "ötödik"));
 
 
 }
@@ -111,20 +127,66 @@ var ObjectMovie = {
 
             movieDiv += `</div> `;
 
-            //document.querySelectorAll("cast-div").innerHTML = castDiv;
-
-            /*<div class="cast-div">
-                                    
-                                </div>*/
 
         }
         document.querySelector("#ideberak").innerHTML = movieDiv;
 
 
+    },
+    szuro: function (data, opt, searcParameter) {
+        let szurtAdatok = [];
+
+
+        switch (opt) {
+            case "title":
+
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].title.toLocaleLowerCase().indexOf(searcParameter.toLocaleLowerCase()) != -1) {
+                        szurtAdatok.push(data[i])
+                    }
+
+                }
+                break;
+            case "director":
+
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].directors.join().toLocaleLowerCase().indexOf(searcParameter.toLocaleLowerCase()) != -1) {
+                        szurtAdatok.push(data[i])
+                    }
+
+                }
+                break;
+
+
+            case "character":
+                console.log("beletpem");
+                for (let i = 0; i < data.length; i++) {
+
+                    for (let j = 0; j < data[i].cast.length; j++)
+                        if (data[i].cast[j].name == searcParameter) {
+
+                            // data[i].cast[j].name.toLocaleLowerCase().indexOf(searcParameter.toLocaleLowerCase()) != -1)
+                            szurtAdatok.push(data[i])
+                            // console.log(i, j);
+                        }
+                };
+                break;
+
+            default:
+                console.log("switch dafault case");
+
+        }
+        console.log("1", szurtAdatok);
+        return szurtAdatok;
+
+
     }
 
 
-};
+
+
+}
+
 
 
 

@@ -11,6 +11,18 @@ body {
     background: #fff;
 }
 
+#upper-div {
+    position: relative;
+    height: 200px;
+    background: linear-gradient( rgb(3, 39, 116), rgb(160, 180, 223));
+    border-radius: 3px;
+    color: white;
+}
+
+.button {
+    color: black;
+}
+
 .movie {
     box-sizing: border-box;
     float: left;
