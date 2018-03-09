@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    background: rgb(203, 211, 228);
+}
+
+.container {
+    margin: 0 auto;
+    position: relative;
+    width: 1000px;
+    ;
+    background: #fff;
+}
+
+.movie {
+    box-sizing: border-box;
+    float: left;
+    width: 25%;
+    padding: 10px;
+}
+
+.movie:nth-of-type(4n+5) {
+    clear: both;
+}
+
+img.character-img {
+    border-radius: 50%;
+}

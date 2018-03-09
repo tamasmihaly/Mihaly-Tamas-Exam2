@@ -4,6 +4,7 @@ function callback(data) {
     console.log(JSONmovies);
     ObjectMovie.rendez(JSONmovies)
     ObjectMovie.kategoria(JSONmovies)
+    ObjectMovie.megjelenit(JSONmovies)
 
 
 
@@ -73,9 +74,83 @@ var ObjectMovie = {
 
 
             }
+    },
+
+
+    megjelenit: function (data) {
+        let movieDiv = "";
+
+        for (let i = 0; i < data.length; i++) {
+
+            movieDiv += `
+                <div class="movie">
+                <img src="/img/covers/${titleNameConverter(data[i].title)}.jpg" alt="${titleNameConverter(data[i].title)}.jpg">
+                    <p class="title-para">
+                        Cím: ${data[i].title}
+                    </p>
+                    <p class="duration-para">
+                        Hossz: ${data[i].timeInMinutes} perc
+                    </p>
+                    <p class="premier-para">
+                        Premier: ${data[i].premierYear}.
+                    </p>
+                    <p class="categories-para">
+                        Kategória:${data[i].categories.join(", ")}
+                    </p>
+                    <p class="director-para">
+                        Rendező: ${data[i].directors.join(", ")}
+                    </p>`;
+
+            let castDiv = "";
+            for (let j = 0; j < data[i].cast.length; j++) {
+                castDiv += `<img class="character-img" src="/img/actors/${titleNameConverter(data[i].cast[j].name)}.jpg" alt="${titleNameConverter(data[i].cast[j].name)}.jpg">
+                    <p>${data[i].cast[j].name} (${data[i].cast[j].characterName})</p>
+                    <p>${data[i].cast[j].birthYear}, ${data[i].cast[j].birthCountry} ${data[i].cast[j].birthCity}</p>`;
+            }
+            movieDiv += castDiv;
+
+            movieDiv += `</div> `;
+
+            //document.querySelectorAll("cast-div").innerHTML = castDiv;
+
+            /*<div class="cast-div">
+                                    
+                                </div>*/
+
+        }
+        document.querySelector("#ideberak").innerHTML = movieDiv;
+
 
     }
-    megjelenit
 
 
+};
+
+
+
+
+function titleNameConverter(titleName) {
+    //címet átkonvertál használható formátúmuvá
+
+
+
+    titleName = titleName.toLocaleLowerCase();
+
+    //cseretömb
+    const hunChars = {
+        á: 'a',
+        é: 'e',
+        í: 'i',
+        ó: 'o',
+        ú: 'u',
+        ö: 'o',
+        ő: 'o',
+        ü: 'u',
+        ű: 'u'
+    };
+    titleName = titleName.replace(/[áéíúóöőüű]/g, c => hunChars[c]); //ékezetes karaktert cserél
+    titleName = titleName.replace(/[^a-z0-9 -]/g, ''); // ami nem normál karakter az kidobja
+    titleName = titleName.replace(/[ -]+/g, '-'); //bármennyi space-t és kötőjelet egy kötőjellre cserél
+    //console.log(titleName);
+    return titleName;
 }
