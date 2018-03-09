@@ -221,7 +221,7 @@ var ObjectMovie = {
 
         document.querySelector(".actors-stat").innerHTML = actorStatdiv + "</p>";
 
-        document.querySelector(".statistical-div").innerHTML = `<p>Összes film játékideje: ${sumMoviesTime} perc</p><p> Átlagos játékidő: ${avgMoviesTime} perc</p>`
+        document.querySelector(".statistical-div").innerHTML = `<p>Összes film játékideje: ${sumMoviesTime} óra</p><p> Átlagos játékidő: ${avgMoviesTime} óra</p>`
     },
 
     torles: function (data) {
