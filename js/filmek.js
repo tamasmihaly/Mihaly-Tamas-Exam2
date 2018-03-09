@@ -6,8 +6,9 @@ function callback(data) {
     ObjectMovie.kategoria(JSONmovies);
     //   ObjectMovie.szuro(JSONmovies, "director", "Fábri");
     ObjectMovie.megjelenit(JSONmovies);
-
+    ObjectMovie.statisztika(JSONmovies);
     document.querySelector("form .button").addEventListener("click", searchFun)
+    document.querySelector(".button-torles").addEventListener("click", torolFun)
 
 
 
@@ -19,6 +20,11 @@ function callback(data) {
         ObjectMovie.megjelenit(ObjectMovie.szuro(JSONmovies, optVal, searchInputVal))
     }
 
+    function torolFun() {
+        ObjectMovie.megjelenit(ObjectMovie.torles(JSONmovies));
+
+
+    }
 
 
     // ObjectMovie.megjelenit(ObjectMovie.szuro(JSONmovies, "title", "ötödik"));
@@ -100,7 +106,7 @@ var ObjectMovie = {
 
             movieDiv += `
                 <div class="movie">
-                <img src="/img/covers/${titleNameConverter(data[i].title)}.jpg" alt="${titleNameConverter(data[i].title)}.jpg">
+                <img  class="cover-img" src="/img/covers/${titleNameConverter(data[i].title)}.jpg" alt="${titleNameConverter(data[i].title)}.jpg">
                     <p class="title-para">
                         Cím: ${data[i].title}
                     </p>
@@ -159,7 +165,6 @@ var ObjectMovie = {
 
 
             case "character":
-                console.log("beletpem");
                 for (let i = 0; i < data.length; i++) {
 
                     for (let j = 0; j < data[i].cast.length; j++)
@@ -176,12 +181,66 @@ var ObjectMovie = {
                 console.log("switch dafault case");
 
         }
-        console.log("1", szurtAdatok);
+
         return szurtAdatok;
 
 
-    }
+    },
 
+    statisztika: function (data) {
+        let sumMoviesTime = 0;
+        let avgMoviesTime = 0;
+        for (let i = 0; i < data.length; i++) {
+            sumMoviesTime += parseInt(data[i].timeInMinutes);
+        }
+        sumMoviesTime = sumMoviesTime / 60
+        avgMoviesTime = (sumMoviesTime / data.length).toFixed(2);
+        let actorsMap = new Map();
+
+
+        for (let i = 0; i < data.length; i++) {
+
+            for (let j = 0; j < data[i].cast.length; j++) {
+
+                if (actorsMap.has(data[i].cast[j].name)) {
+
+                    actorsMap.set(data[i].cast[j].name, actorsMap.get(data[i].cast[j].name) + 1)
+                } else {
+                    actorsMap.set(data[i].cast[j].name, 1)
+                }
+
+            }
+        }
+
+
+        let actorStatdiv = "<p>";
+        for (let k of actorsMap) {
+            actorStatdiv += `${k} `;
+        }
+        // console.log(actorStatdiv);
+
+        document.querySelector(".actors-stat").innerHTML = actorStatdiv + "</p>";
+
+        document.querySelector(".statistical-div").innerHTML = `<p>Összes film játékideje: ${sumMoviesTime} perc</p><p> Átlagos játékidő: ${avgMoviesTime} perc</p>`
+    },
+
+    torles: function (data) {
+        let nemToroltAdatok = [];
+
+        for (let i = 0; i < data.length; i++) {
+            if (parseInt(data[i].premierYear) >= 1990) {
+                nemToroltAdatok.push(data[i])
+            }
+
+        }
+
+        // ha az eredetit is változtatni akarjuk akkor data=nemToroltAdatok
+        console.log(nemToroltAdatok);
+
+
+        return nemToroltAdatok;
+
+    }
 
 
 

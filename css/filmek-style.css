@@ -1,25 +1,27 @@
 body {
     margin: 0;
-    background: rgb(203, 211, 228);
+    background: rgb(160, 180, 223);
 }
 
 .container {
     margin: 0 auto;
     position: relative;
     width: 1000px;
-    ;
-    background: #fff;
 }
 
 #upper-div {
     position: relative;
-    height: 200px;
+    height: 300px;
     background: linear-gradient( rgb(3, 39, 116), rgb(160, 180, 223));
     border-radius: 3px;
     color: white;
 }
 
 .button {
+    color: black;
+}
+
+.button-torles {
     color: black;
 }
 
@@ -36,4 +38,11 @@ body {
 
 img.character-img {
     border-radius: 50%;
+    box-shadow: 0px 0px 10px 5px;
+    margin-bottom: 5px;
+}
+
+img.cover-img {
+    box-shadow: 0px 0px 10px 5px;
+    margin-bottom: 5px;
 }
